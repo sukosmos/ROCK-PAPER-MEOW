@@ -1,2 +1,2 @@
-# Rock-Scissors-Paper-with-cat
+# Rock-Paper-Scissors-with-cat
 Can you win?
