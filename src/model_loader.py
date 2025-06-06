@@ -1,9 +1,6 @@
-#src/model loader
-# src/model_loader.py
+import joblib
 
-from tensorflow.keras.models import load_model
-
-def load_trained_model(path="../models/rps_model.h5"):
-    model = load_model(path)
+def load_trained_model(path="../models/hand_classifier.pkl"):
+    model = joblib.load(path)
     print("Model loaded from", path)
     return model
