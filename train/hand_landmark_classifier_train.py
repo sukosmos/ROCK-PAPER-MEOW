@@ -9,7 +9,7 @@ import joblib
 import os
 
 # 설정
-csv_path = "../data/landmark_dataset.csv"  # mediapipe_dataset_builder가 만든 CSV 경로
+csv_path = "../data/landmark_dataset.csv"  
 model_output_path = "../models/hand_classifier.pkl"
 
 # CSV 로딩
