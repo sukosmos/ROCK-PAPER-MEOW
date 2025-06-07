@@ -8,3 +8,6 @@ Can you win?
 ![image](https://github.com/user-attachments/assets/c49a5e65-c06f-4241-8bc2-3dc1161399cb)
 ![image](https://github.com/user-attachments/assets/89ad881d-599b-45ea-9187-a51a4f79f655)
 ![image](https://github.com/user-attachments/assets/910e7b43-6ca0-443e-8343-fb3d58a2218f)
+
+
+![image](https://github.com/user-attachments/assets/1689d260-91e1-4fbd-893e-17eb765e77c9)
