@@ -5,7 +5,7 @@ import time
 import os
 import random
 from model_loader import load_trained_model
-from hand_predictor import detect_hand_label
+from hand_predictor import detect_hand_label, detect_hand_presence
 from game_logic import get_winner
 from scene_renderer import render_scene, render_snapshot_result
 from audio_player import play_sound
@@ -37,10 +37,10 @@ sound_dir = "assets/sounds"
 # image(투명 배경 유지)
 images = {name: cv2.imread(os.path.join(image_dir, f"cat_{name}.png"), cv2.IMREAD_UNCHANGED)
           for name in ["main", "wait", "match", "win", "lose", "gamewin", "gamelose",
-                       "rock", "paper", "scissors"]}
+                       "rock", "paper", "scissors", "draw"]}
 
 # model 
-model = load_trained_model("../models/hand_classifier.pkl")
+model = load_trained_model()
 
 # 카메라 시작
 cap = cv2.VideoCapture(0)
@@ -64,8 +64,7 @@ while True:
 
     elif state == STATE_READY:
         display = render_scene(frame, images["wait"], "Show your hand to start!", player_score, cat_score)
-        label = detect_hand_label(frame, model)
-        if label is not None:
+        if detect_hand_presence(frame):
             state = STATE_COUNTDOWN
             last_state_change = current_time
 
@@ -89,30 +88,40 @@ while True:
             last_state_change = time.time()
 
     elif state == STATE_RESULT:
-        winner = get_winner(player_move, cat_move)
+        if result_start_time is None:
+            # 최초 진입 시에만 점수 반영
+            winner = get_winner(player_move, cat_move)
+    
+            if winner == "player":
+                player_score += 1
+                winner_state = "player win"
+                result_image="lose"
+            elif winner == "cat":
+                cat_score += 1
+                winner_state = "cat win"
+                result_image="win"
+            else:
+                winner_state = "draw"
+                result_image="draw"
+    
+            result_start_time = current_time  # 시간 기록
+    
+        display = render_scene(snapshot, images[result_image], f"{winner_state}", player_score, cat_score)
+    
+        if current_time - result_start_time > 2:
+            if player_score >= win_score or cat_score >= win_score:
+                state = STATE_GAME_OVER
+            else:
+                state = STATE_COUNTDOWN
+            last_state_change = current_time
+            result_start_time = None  # 초기화
 
-        if winner == "player":
-            player_score += 1
-            winner_state="player win"
-        elif winner == "cat":
-            cat_score += 1
-            winner_state="cat win"
-        elif winner == "draw":
-            winner_state="draw"
-
-        display = render_scene(snapshot, images["win" if winner == "player" else "lose"], f"{winner_state}", player_score, cat_score)
-        
-        if player_score >= win_score or cat_score >= win_score:
-            state = STATE_GAME_OVER
-        else:
-            state = STATE_COUNTDOWN  # 반복
-        last_state_change = time.time()
 
     elif state == STATE_GAME_OVER:
         if player_score >= win_score:
-            display = render_scene(frame, images["gamewin"], "You win", player_score, cat_score)
+            display = render_scene(frame, images["gamelose"], "You win", player_score, cat_score)
         else:
-            display = render_scene(frame, images["gamelose"], "Cat wins", player_score, cat_score)
+            display = render_scene(frame, images["gamewin"], "Cat wins", player_score, cat_score)
 
         if elapsed > 5:
             player_score = 0

@@ -23,3 +23,8 @@ def detect_hand_label(frame, model):
         return prediction[0]
     else:
         return None
+
+def detect_hand_presence(frame):
+    image = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
+    results = hands.process(image)
+    return results.multi_hand_landmarks is not None
