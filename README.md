@@ -315,5 +315,14 @@ https://github.com/sukosmos/Rock-Paper-Scissors-with-cat/issues?q=is%3Aissue%20s
 
 <br><br>
 
+---
 
+# 참고
+
+- Kaggle Rock-Paper-Scissors-Dataset: https://www.kaggle.com/datasets/alexandredj/rock-paper-scissors-dataset
+- MobileNet: https://arxiv.org/abs/1801.04381
+- MediaPipe-hands: https://github.com/google-ai-edge/mediapipe/blob/master/docs/solutions/hands.md
+- ChatCPT
+
+<br><br>
 
