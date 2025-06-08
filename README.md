@@ -268,7 +268,7 @@ OpenCV에 사운드를 지원하기 위해 Pygame 사용
 
 
 
-## Play Video
+## Demo Video
 
 https://www.youtube.com/watch?v=Ml9RkVhMupY
 
