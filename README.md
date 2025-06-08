@@ -298,6 +298,10 @@ https://github.com/sukosmos/Rock-Paper-Scissors-with-cat/issues?q=is%3Aissue%20s
 - 배경이 복잡할 시 성능 대폭 저하, 손이 잘 보이도록 배경을 설정해야함
 - 더 좋은 성능을 기대할 수 있는 training 방법 찾아보기
 
+## gamelogic - state=COUNTDOWN
+- 가위바위보 카운트에 손을 내면 인식이 느린 issue 발생
+- `if elapsed >= 3.5:` 에서 `if elapsed >= 4:`로 시간 조정
+- 개선 완료
 
 ## audio_player
 
