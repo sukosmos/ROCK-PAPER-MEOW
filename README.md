@@ -207,7 +207,7 @@ SPACE 입력 시 → `STATE_READY`
 
 사용자의 손 제스처도 함께 보여줌
 
-1초간 정지 상태 유지 후 → `STATE_RESULT`
+2초간 정지 상태 유지 후 → `STATE_RESULT`
 
 <br>
 
