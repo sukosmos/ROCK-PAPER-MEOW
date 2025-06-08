@@ -34,7 +34,7 @@ gameover_sound_played = False
 
 # path
 image_dir = "../assets/images"
-sound_dir = "C:\\Users\\user\\Documents\\25-1\\컴비\\codes\\Rock-Scissors-Paper-with-cat\\assets\\sound\\"
+sound_dir = "C:\\Users\\user\\"
 
 # image(투명 배경 유지)
 images = {name: cv2.imread(os.path.join(image_dir, f"cat_{name}.png"), cv2.IMREAD_UNCHANGED)
