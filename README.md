@@ -182,7 +182,7 @@ SPACE 입력 시 → `STATE_READY`
 
 3초 동안 숫자 카운트 표시 (Ready... 3, Ready... 2, Ready... 1)
 
-3.5초 후 프레임을 캡처하고 snapshot 저장
+4초 후 프레임을 캡처하고 snapshot 저장
 
 `detect_hand_label()`을 통해 trained model이 사용자의 손 제스처 예측 (rock-paper-scissors)
 
