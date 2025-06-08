@@ -1,10 +1,12 @@
-# Rock Paper Scissors with Cat 😻
+![image](https://github.com/user-attachments/assets/6da9f9c0-8125-4e0a-9018-20816d5a2871)
+
+# ROCK-PAPER-MEOW 😻
 
 Webcam으로 고양이와 가위바위보 승부! 😼
 <br>
 kaggle의 가위바위보 image dataset을 학습한 MobileNetV2 기반 모델이 랜덤하게 패를 내는 고양이와의 승부를 판별합니다.
 
-![image](https://github.com/user-attachments/assets/14df9181-8a23-4384-9f60-c0751aaa90d2)
+
 
 <br>
 
