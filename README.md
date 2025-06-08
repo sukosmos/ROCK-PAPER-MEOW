@@ -298,9 +298,6 @@ https://github.com/sukosmos/Rock-Paper-Scissors-with-cat/issues?q=is%3Aissue%20s
 - 배경이 복잡할 시 성능 대폭 저하, 손이 잘 보이도록 배경을 설정해야함
 - 더 좋은 성능을 기대할 수 있는 training 방법 찾아보기
 
-## game logic
-
-- 가위바위보 게임에 맞게 1초에 손을 내면 인식이 어려움. 급변하게 바뀜을 막기 위해 손을 계속 동일한 모양으로 유지해야 함
 
 ## audio_player
 
