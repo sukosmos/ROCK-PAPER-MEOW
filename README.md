@@ -296,6 +296,7 @@ https://github.com/sukosmos/Rock-Paper-Scissors-with-cat/issues?q=is%3Aissue%20s
 
 - 모델이 화면상 오른쪽 손의 인식 성능이 더 우수함. webcam은 좌우반전이 적용되므로 왼손 사용시 판단 성능이 뛰어남
 - 배경이 복잡할 시 성능 대폭 저하, 손이 잘 보이도록 배경을 설정해야함
+- scissors를 rock으로, paper를 scissors로 판단하는 경향
 - 더 좋은 성능을 기대할 수 있는 training 방법 찾아보기
 
 ## gamelogic - state=COUNTDOWN
