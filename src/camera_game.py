@@ -82,7 +82,7 @@ while True:
         play_sound(sound_dir+"countdown.wav")
         seconds_left = countdown_time - int(elapsed)
         display = render_scene(frame, images["match"], f"Ready... {seconds_left}", player_score, cat_score)
-        if elapsed >= 3.5:
+        if elapsed >= 4:
             snapshot = frame.copy()
             player_move = detect_hand_label(snapshot, model)
             cat_move = random.choice(["rock", "paper", "scissors"])
