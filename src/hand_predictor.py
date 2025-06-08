@@ -36,7 +36,7 @@ def detect_hand_label(frame, model):
 
         prediction = model.predict(hand_img)
         label = np.argmax(prediction[0])
-        label_map = {0: "rock", 1: "paper", 2: "scissors"}
+        label_map = {0: "paper", 1: "rock", 2: "scissors"}
         return label_map[label]
     
     return None
