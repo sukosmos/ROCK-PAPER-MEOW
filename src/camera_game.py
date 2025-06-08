@@ -8,7 +8,7 @@ from model_loader import load_trained_model
 from hand_predictor import detect_hand_label, detect_hand_presence
 from game_logic import get_winner
 from scene_renderer import render_scene, render_snapshot_result
-from audio_player import play_sound
+from audio_player import preload_sounds, play_sound, stop_sound, play_main_loop, stop_main_loop
 
 # STATE
 STATE_MAIN = "main"
@@ -29,15 +29,21 @@ snapshot = None
 player_move = None
 cat_move = None
 result_start_time = None
+gameover_sound_played = False
+
 
 # path
 image_dir = "../assets/images"
-sound_dir = "assets/sounds"
+sound_dir = "C:\\Users\\user\\Documents\\25-1\\컴비\\codes\\Rock-Scissors-Paper-with-cat\\assets\\sound\\"
 
 # image(투명 배경 유지)
 images = {name: cv2.imread(os.path.join(image_dir, f"cat_{name}.png"), cv2.IMREAD_UNCHANGED)
           for name in ["main", "wait", "match", "win", "lose", "gamewin", "gamelose",
                        "rock", "paper", "scissors", "draw"]}
+
+# sound
+preload_sounds(sound_dir)
+
 
 # model 
 model = load_trained_model()
@@ -57,18 +63,23 @@ while True:
     elapsed = current_time - last_state_change
 
     if state == STATE_MAIN:
+        play_main_loop(sound_dir+"main_loop.wav")
         display = render_scene(frame, images["main"], "Press SPACE to start", player_score, cat_score)
         if key == ord(' '):
-            state = STATE_READY
+            stop_sound()
+            state = STATE_COUNTDOWN
             last_state_change = current_time
 
     elif state == STATE_READY:
+        stop_sound()
         display = render_scene(frame, images["wait"], "Show your hand to start!", player_score, cat_score)
         if detect_hand_presence(frame):
+            stop_sound()
             state = STATE_COUNTDOWN
             last_state_change = current_time
 
     elif state == STATE_COUNTDOWN:
+        play_sound(sound_dir+"countdown.wav")
         seconds_left = countdown_time - int(elapsed)
         display = render_scene(frame, images["match"], f"Ready... {seconds_left}", player_score, cat_score)
         if elapsed >= 3.5:
@@ -76,18 +87,21 @@ while True:
             player_move = detect_hand_label(snapshot, model)
             cat_move = random.choice(["rock", "paper", "scissors"])
             if player_move is None:
+                stop_sound()
                 state = STATE_READY
             else:
                 state = STATE_SNAPSHOT
             last_state_change = time.time()
 
     elif state == STATE_SNAPSHOT:
+        stop_sound()
         display = render_snapshot_result(snapshot, images[cat_move], player_move)
-        if time.time() - last_state_change > 2:
+        if time.time() - last_state_change > 1:
             state = STATE_RESULT
             last_state_change = time.time()
 
     elif state == STATE_RESULT:
+
         if result_start_time is None:
             # 최초 진입 시에만 점수 반영
             winner = get_winner(player_move, cat_move)
@@ -118,18 +132,27 @@ while True:
 
 
     elif state == STATE_GAME_OVER:
+        if not gameover_sound_played:
+            stop_sound()
+            stop_main_loop()
+            play_main_loop(sound_dir + "end.wav", force=True)
+            gameover_sound_played = True
+        
         if player_score >= win_score:
             display = render_scene(frame, images["gamelose"], "You win", player_score, cat_score)
         else:
             display = render_scene(frame, images["gamewin"], "Cat wins", player_score, cat_score)
 
-        if elapsed > 5:
+        if elapsed > 15:
             player_score = 0
             cat_score = 0
+            stop_main_loop()
+            gameover_sound_played = False
             state = STATE_MAIN
 
     # ESC 종료
     if key == 27:
+        stop_main_loop()
         break
 
     cv2.imshow("Rock Paper Scissors", display)
