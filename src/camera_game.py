@@ -34,7 +34,7 @@ gameover_sound_played = False
 
 # path
 image_dir = "../assets/images"
-sound_dir = "C:\\Users\\user\\"
+sound_dir = "C:\\Users\\user\\" # 절대 경로로 사용
 
 # image(투명 배경 유지)
 images = {name: cv2.imread(os.path.join(image_dir, f"cat_{name}.png"), cv2.IMREAD_UNCHANGED)
@@ -96,7 +96,7 @@ while True:
     elif state == STATE_SNAPSHOT:
         stop_sound()
         display = render_snapshot_result(snapshot, images[cat_move], player_move)
-        if time.time() - last_state_change > 1:
+        if time.time() - last_state_change > 2:
             state = STATE_RESULT
             last_state_change = time.time()
 
