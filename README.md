@@ -4,6 +4,8 @@ Webcam으로 고양이와 가위바위보 승부! 😼
 <br>
 kaggle의 가위바위보 image dataset을 학습한 MobileNetV2 기반 모델이 랜덤하게 패를 내는 고양이와의 승부를 판별합니다.
 
+![image](https://github.com/user-attachments/assets/14df9181-8a23-4384-9f60-c0751aaa90d2)
+
 <br>
 
 ---
@@ -297,7 +299,15 @@ https://github.com/sukosmos/Rock-Paper-Scissors-with-cat/issues?q=is%3Aissue%20s
 
 - state=ready일 때 소리가 안 나는 오류가 있음
 - audio play가 많을수록 재생 지연 발생
-  
+
+## UX
+
+- 더 깔끔한 UX 디자인 필요
+
+## 적용성
+
+- 현재 python OpenCV 환경에서만 사용가능
+- 웹/앱 등에도 사용할 수 있도록 개발 
 
 
 
